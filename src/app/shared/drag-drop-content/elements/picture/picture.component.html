@@ -1,0 +1,28 @@
+<div
+  [ngStyle]="{
+    'padding-top': component.componentSettings.padding_top + 'px',
+    'padding-right': component.componentSettings.padding_right + 'px',
+    'padding-bottom': component.componentSettings.padding_bottom + 'px',
+    'padding-left': component.componentSettings.padding_left + 'px',
+    'background-color': component.componentSettings.background_color,
+    'border-radius': component.componentSettings.rounded_corners + 'px',
+    height: component.componentSettings.height > 0 ? component.componentSettings.height + 'px' : 'auto',
+    'text-align': component.element.alignment,
+    overflow: 'hidden'
+  }"
+>
+  <div class="text-center" *ngIf="component.element.image_url === ''">
+    <p><i class="fas fa-3x fa-image"></i></p>
+    <p translate>Add picture</p>
+  </div>
+  <a href="" (click)="$event.preventDefault()" *ngIf="component.element.image_url !== ''">
+    <img
+      [src]="component.element.image_url"
+      alt=""
+      [ngStyle]="{
+        width: component.element.width === 0 ? 'auto' : component.element.width + '%',
+        'max-width': '100%'
+      }"
+    />
+  </a>
+</div>

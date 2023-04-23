@@ -1,0 +1,227 @@
+<div class="mb-2">
+  <label translate>Upload URL</label>
+  <input
+    type="text"
+    name="upload_url"
+    [(ngModel)]="component.element.upload_url"
+    class="form-control form-control-sm"
+    placeholder="https://example.com/upload-handler"
+  />
+</div>
+<div class="mb-2">
+  <label translate>Field name</label>
+  <input
+    type="text"
+    name="field_name"
+    [(ngModel)]="component.element.field_name"
+    class="form-control form-control-sm"
+  />
+</div>
+<div class="mb-2">
+  <label translate>Accepted Files</label>
+  <input
+    type="text"
+    name="accepted_files"
+    [(ngModel)]="component.element.accepted_files"
+    class="form-control form-control-sm"
+  />
+  <div class="form-text">
+    This is a comma separated list of mime types or file extensions. Eg.:
+    image/*,application/pdf,.psd
+  </div>
+</div>
+<div class="mb-2">
+  <label translate>Max file size</label>
+  <input
+    type="number"
+    name="max_file_size"
+    [(ngModel)]="component.element.max_file_size"
+    class="form-control form-control-sm"
+    min="0"
+  />
+  <div class="form-text">
+    The maximum filesize (in MiB) that is allowed to be uploaded.
+  </div>
+</div>
+<div class="my-2">
+  <label translate>Placeholder text</label>
+  <input
+    type="text"
+    name="placeholder"
+    [(ngModel)]="component.element.placeholder"
+    class="form-control form-control-sm"
+  />
+</div>
+<div class="row mb-2">
+  <label for="" class="col-sm-6" translate>Placeholder color</label>
+  <div class="col-sm-6">
+    <div class="input-group">
+      <span
+        class="input-group-text"
+        [style.background]="component.element.text_color"
+      ></span>
+      <input
+        class="form-control form-control-sm"
+        [(colorPicker)]="component.element.text_color"
+        [cpPosition]="'bottom'"
+        [cpDisableInput]="true"
+        [cpAlphaChannel]="'disabled'"
+        [cpPositionOffset]="'-100%'"
+        [value]="component.element.text_color"
+      />
+    </div>
+  </div>
+</div>
+<div class="row mb-2">
+  <label for="" class="col-sm-6" translate>Uploader size</label>
+  <div class="col-sm-6">
+    <select
+      class="form-select form-select-sm"
+      [(ngModel)]="component.element.width_type"
+    >
+      <option value="auto" translate>Auto</option>
+      <option value="full-width" translate>The full width</option>
+      <option value="fixed" translate>Fixed size</option>
+    </select>
+  </div>
+</div>
+<div class="row mb-2" *ngIf="component.element.width_type === 'fixed'">
+  <div class="col-sm-6 offset-6">
+    <input
+      type="number"
+      min="0"
+      class="form-control form-control-sm"
+      [(ngModel)]="component.element.width"
+    />
+  </div>
+</div>
+<div class="row mb-2">
+  <label for="" class="col-sm-6" translate>Alignment</label>
+  <div class="col-sm-6">
+    <div class="row g-0">
+      <button
+        class="col btn btn-primary btn-sm rounded-0"
+        [ngClass]="{ active: component.element.alignment === 'left' }"
+        (click)="component.element.alignment = 'left'"
+      >
+        <i class="fas fa-align-left"></i>
+      </button>
+      <button
+        class="col btn btn-primary btn-sm rounded-0"
+        [ngClass]="{ active: component.element.alignment === 'center' }"
+        (click)="component.element.alignment = 'center'"
+      >
+        <i class="fas fa-align-center"></i>
+      </button>
+      <button
+        class="col btn btn-primary btn-sm rounded-0"
+        [ngClass]="{ active: component.element.alignment === 'right' }"
+        (click)="component.element.alignment = 'right'"
+      >
+        <i class="fas fa-align-right"></i>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="row mb-2">
+  <label for="" class="col-sm-6" translate>Placeholder font</label>
+  <div class="col-sm-6">
+    <app-font-options [component]="component"></app-font-options>
+  </div>
+</div>
+<div class="row mb-2">
+  <label class="col-6" translate>Placeholder font size</label>
+  <div class="col-6">
+    <div class="input-group input-group-sm">
+      <input
+        type="number"
+        class="form-control form-control-sm"
+        min="12"
+        [(ngModel)]="component.element.font_size"
+      />
+      <span class="input-group-text">px</span>
+    </div>
+  </div>
+</div>
+<div class="row mb-2">
+  <label for="" class="col-sm-6" translate>Line height</label>
+  <div class="col-sm-6">
+    <div class="row g-0">
+      <button
+        class="col btn btn-primary btn-sm rounded-0"
+        [ngClass]="{ active: component.element.line_height === 1 }"
+        (click)="component.element.line_height = 1"
+      >
+        <img src="assets/lh1.svg" alt="" />
+      </button>
+      <button
+        class="col btn btn-primary btn-sm rounded-0"
+        [ngClass]="{ active: component.element.line_height === 1.2 }"
+        (click)="component.element.line_height = 1.2"
+      >
+        <img src="assets/lh12.svg" alt="" />
+      </button>
+      <button
+        class="col btn btn-primary btn-sm rounded-0"
+        [ngClass]="{ active: component.element.line_height === 1.5 }"
+        (click)="component.element.line_height = 1.5"
+      >
+        <img src="assets/lh15.svg" alt="" />
+      </button>
+      <button
+        class="col btn btn-primary btn-sm rounded-0"
+        [ngClass]="{ active: component.element.line_height === 2 }"
+        (click)="component.element.line_height = 2"
+      >
+        <img src="assets/lh2.svg" alt="" />
+      </button>
+    </div>
+  </div>
+</div>
+<div class="row g-0 mb-2">
+  <div class="col-3">
+    <input
+      type="number"
+      min="0"
+      class="form-control form-control-sm"
+      [(ngModel)]="component.element.border_width"
+    />
+  </div>
+  <div class="col-4 px-2">
+    <div ngbDropdown class="d-block">
+      <button class="btn btn-sm w-100 btn-outline-primary" ngbDropdownToggle>
+        <div
+          [class]="'separator-style ' + component.element.border_style"
+        ></div>
+      </button>
+      <div ngbDropdownMenu>
+        <a ngbDropdownItem (click)="component.element.border_style = 'solid'">
+          <div class="separator-style solid"></div>
+        </a>
+        <a ngbDropdownItem (click)="component.element.border_style = 'dashed'">
+          <div class="separator-style dashed"></div>
+        </a>
+        <a ngbDropdownItem (click)="component.element.border_style = 'dotted'">
+          <div class="separator-style dotted"></div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="col-5">
+    <div class="input-group">
+      <span
+        class="input-group-text"
+        [style.background]="component.element.border_color"
+      ></span>
+      <input
+        class="form-control form-control-sm"
+        [(colorPicker)]="component.element.border_color"
+        [cpPosition]="'bottom'"
+        [cpDisableInput]="true"
+        [cpAlphaChannel]="'disabled'"
+        [cpPositionOffset]="'-100%'"
+        [value]="component.element.border_color"
+      />
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+.btn-outline-primary {
+  height: auto;
+
+  & > .separator-style {
+    width: 80% !important;
+  }
+}
+
+.separator-style {
+  border-top-width: 0;
+  width: 100%;
+  margin-bottom: 4px;
+  line-height: 1px;
+  display: inline-block;
+
+  &.solid {
+    border-style: solid;
+  }
+
+  &.dashed {
+    border-style: dashed;
+  }
+
+  &.dotted {
+    border-style: dotted;
+  }
+}

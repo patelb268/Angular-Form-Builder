@@ -1,0 +1,51 @@
+<div
+  [ngStyle]="{
+    'padding-top': component.componentSettings.padding_top + 'px',
+    'padding-right': component.componentSettings.padding_right + 'px',
+    'padding-bottom': component.componentSettings.padding_bottom + 'px',
+    'padding-left': component.componentSettings.padding_left + 'px',
+    'background-color': component.componentSettings.background_color,
+    'border-radius': component.componentSettings.rounded_corners + 'px',
+    height:
+      component.componentSettings.height > 0
+        ? component.componentSettings.height + 'px'
+        : 'auto'
+  }"
+>
+  <label
+    class="mb-0"
+    [ngClass]="{
+      'fw-bold': formDesign.label_font_bold,
+      'fst-italic': formDesign.label_font_italic,
+      'd-none': !component.element.show_label
+    }"
+    [ngStyle]="{
+      color: formDesign.label_font_color,
+      'font-size': formDesign.label_font_size + 'px'
+    }"
+  >
+    {{ component.element.label }}
+    <span *ngIf="component.element.is_required" class="text-danger">*</span>
+  </label>
+  <div class="form-check" *ngFor="let option of component.element.options">
+    <input
+      class="form-check-input"
+      type="radio"
+      name="radio[{{ component.id }}]"
+      id="radio_{{ option.id }}"
+      [value]="option.value"
+      [checked]="option.is_selected"
+    />
+    <label
+      class="form-check-label"
+      for="radio_{{ option.id }}"
+      [ngClass]="{ 'fst-italic': formDesign.label_font_italic }"
+      [ngStyle]="{
+        color: formDesign.label_font_color,
+        'font-size': formDesign.label_font_size + 'px'
+      }"
+    >
+      {{ option.text }}
+    </label>
+  </div>
+</div>

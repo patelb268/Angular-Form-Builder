@@ -1,0 +1,9 @@
+<ck-editor
+  name="content"
+  [(ngModel)]="content"
+  [config]="editorConfig"
+  [language]="currentLanguage"
+  (change)="handleValueChange($event)"
+  #ckEditor="ckEditor"
+  [fullPage]="true"
+></ck-editor>

@@ -1,0 +1,32 @@
+<div
+  [ngStyle]="{
+    'padding-top': component.componentSettings.padding_top + 'px',
+    'padding-right': component.componentSettings.padding_right + 'px',
+    'padding-bottom': component.componentSettings.padding_bottom + 'px',
+    'padding-left': component.componentSettings.padding_left + 'px',
+    'background-color': component.componentSettings.background_color,
+    'border-radius': component.componentSettings.rounded_corners + 'px',
+    height:
+      component.componentSettings.height > 0
+        ? component.componentSettings.height + 'px'
+        : 'auto'
+  }"
+  class="form-check ms-0"
+>
+  <input type="checkbox" class="form-check-input ms-0 me-2" [id]="component.id" />
+  <label
+    class="form-check-label"
+    [ngClass]="{
+      'fw-bold': formDesign.label_font_bold,
+      'fst-italic': formDesign.label_font_italic
+    }"
+    [ngStyle]="{
+      color: formDesign.label_font_color,
+      'font-size': formDesign.label_font_size + 'px'
+    }"
+    [for]="component.id"
+  >
+    {{ component.element.label }}
+    <span *ngIf="component.element.is_required" class="text-danger">*</span>
+  </label>
+</div>

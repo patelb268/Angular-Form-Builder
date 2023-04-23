@@ -1,0 +1,11 @@
+<div 
+  [ngStyle]="{
+    'padding-top': component.componentSettings.padding_top + 'px',
+    'padding-right': component.componentSettings.padding_right + 'px',
+    'padding-bottom': component.componentSettings.padding_bottom + 'px',
+    'padding-left': component.componentSettings.padding_left + 'px',
+    'background-color': component.componentSettings.background_color,
+    'border-radius': component.componentSettings.rounded_corners + 'px',
+    'height': component.element.height > 0 ? component.element.height + 'px' : 'auto'
+  }"
+></div>

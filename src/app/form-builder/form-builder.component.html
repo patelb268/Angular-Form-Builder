@@ -1,0 +1,388 @@
+<ng-template #recursiveList let-elements>
+  <div dndPlaceholderRef class="dndPlaceholder"></div>
+  <div
+    *ngFor="let component of elements"
+    class="selected-component"
+    [ngClass]="{ 'is-selected': component.isSelected }"
+    (click)="setSelectedComponent($event, component)"
+    dndEffectAllowed="move"
+    [dndDraggable]="component"
+    (dndStart)="onDragStart($event)"
+    (dndCopied)="onDragged(component, elements, 'copy')"
+    (dndLinked)="onDragged(component, elements, 'link')"
+    (dndMoved)="onDragged(component, elements, 'move')"
+    (dndCanceled)="onDragged(component, elements, 'none')"
+    (dndEnd)="onDragEnd($event)"
+  >
+    <ng-container [ngSwitch]="component.machineName">
+      <ng-container
+        *ngTemplateOutlet="sectionTpl; context: { $implicit: component }"
+      ></ng-container>
+      <app-text *ngSwitchCase="'text'" [component]="component"></app-text>
+      <app-picture
+        *ngSwitchCase="'picture'"
+        [component]="component"
+      ></app-picture>
+      <app-button *ngSwitchCase="'button'" [component]="component"></app-button>
+      <app-textarea
+        *ngSwitchCase="'textarea'"
+        [component]="component"
+        [formDesign]="subscriptionForm.content_dnd.form_design"
+      ></app-textarea>
+      <app-spacer *ngSwitchCase="'spacer'" [component]="component"></app-spacer>
+      <app-separator
+        *ngSwitchCase="'separator'"
+        [component]="component"
+      ></app-separator>
+      <app-social *ngSwitchCase="'social'" [component]="component"></app-social>
+      <app-checkbox
+        *ngSwitchCase="'checkbox'"
+        [component]="component"
+        [formDesign]="subscriptionForm.content_dnd.form_design"
+      ></app-checkbox>
+      <app-dropdown
+        *ngSwitchCase="'dropdown'"
+        [component]="component"
+        [formDesign]="subscriptionForm.content_dnd.form_design"
+      ></app-dropdown>
+      <app-radios
+        *ngSwitchCase="'radios'"
+        [component]="component"
+        [formDesign]="subscriptionForm.content_dnd.form_design"
+      ></app-radios>
+      <app-input
+        *ngSwitchCase="'input'"
+        [component]="component"
+        [formDesign]="subscriptionForm.content_dnd.form_design"
+      ></app-input>
+      <app-uploader
+        *ngSwitchCase="'uploader'"
+        [component]="component"
+        [formDesign]="subscriptionForm.content_dnd.form_design"
+      ></app-uploader>
+    </ng-container>
+    <div dndDragImageRef class="my_placeholder"></div>
+    <div class="drag-handler rounded-circle" dndHandle>
+      <i class="fas fa-arrows-alt"></i>
+    </div>
+    <div class="container-action-wrapper" *ngIf="component.deletable">
+      <button
+        class="btn btn-sm btn-danger"
+        placement="bottom"
+        ngbTooltip="{{ 'Delete' | translate }}"
+        (click)="deleteComponent($event, component.id)"
+      >
+        <i class="fas fa-trash"></i>
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #sectionTpl let-component>
+  <div class="row no-gutters" [ngSwitch]="component.column">
+    <ng-container *ngSwitchCase="'2-1-3'">
+      <div
+        class="col-4 border border-primary border-dashed section-area"
+        [ngClass]="{
+          'not-added-component': component.addedComponents[0].length === 0
+        }"
+        [dndDropzone]="['nc']"
+        (dndDrop)="onDrop($event, component.addedComponents[0])"
+      >
+        <ng-container
+          *ngTemplateOutlet="
+            recursiveList;
+            context: { $implicit: component.addedComponents[0] }
+          "
+        >
+        </ng-container>
+      </div>
+      <div
+        class="col-8 border border-primary border-dashed section-area"
+        [ngClass]="{
+          'not-added-component': component.addedComponents[1].length === 0
+        }"
+        [dndDropzone]="['nc']"
+        (dndDrop)="onDrop($event, component.addedComponents[1])"
+      >
+        <ng-container
+          *ngTemplateOutlet="
+            recursiveList;
+            context: { $implicit: component.addedComponents[1] }
+          "
+        >
+        </ng-container>
+      </div>
+    </ng-container>
+    <ng-container *ngSwitchCase="'2-3-1'">
+      <div
+        class="col-8 border border-primary border-dashed section-area"
+        [ngClass]="{
+          'not-added-component': component.addedComponents[0].length === 0
+        }"
+        [dndDropzone]="['nc']"
+        (dndDrop)="onDrop($event, component.addedComponents[0])"
+      >
+        <ng-container
+          *ngTemplateOutlet="
+            recursiveList;
+            context: { $implicit: component.addedComponents[0] }
+          "
+        >
+        </ng-container>
+      </div>
+      <div
+        class="col-4 border border-primary border-dashed section-area"
+        [ngClass]="{
+          'not-added-component': component.addedComponents[1].length === 0
+        }"
+        [dndDropzone]="['nc']"
+        (dndDrop)="onDrop($event, component.addedComponents[1])"
+      >
+        <ng-container
+          *ngTemplateOutlet="
+            recursiveList;
+            context: { $implicit: component.addedComponents[1] }
+          "
+        >
+        </ng-container>
+      </div>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      <div
+        class="col border border-primary border-dashed section-area"
+        *ngFor="let c of component.addedComponents; let i = index"
+        [ngClass]="{
+          'not-added-component': component.addedComponents[i].length === 0
+        }"
+        [dndDropzone]="['nc']"
+        (dndDrop)="onDrop($event, component.addedComponents[i])"
+      >
+        <ng-container
+          *ngTemplateOutlet="
+            recursiveList;
+            context: { $implicit: component.addedComponents[i] }
+          "
+        >
+        </ng-container>
+      </div>
+    </ng-container>
+  </div>
+</ng-template>
+
+<ng-template #popTitle
+  ><span translate>Add New Section</span>
+  <a class="fas fa-times float-end" (click)="closePopover()"></a
+></ng-template>
+
+<ng-template #popContent>
+  <div class="container-fluid">
+    <div class="row">
+      <div
+        class="col-6 mb-3"
+        *ngFor="let sectionComponent of sectionComponents"
+      >
+        <img
+          [src]="sectionComponent.image"
+          alt=""
+          class="img-fluid"
+          [dndDraggable]="sectionComponent"
+          [dndType]="'se'"
+          (dndStart)="onDragStart($event)"
+          (dndCopied)="onDragged(sectionComponent, addedComponents, 'copy')"
+          (dndLinked)="onDragged(sectionComponent, addedComponents, 'link')"
+          (dndMoved)="onDragged(sectionComponent, addedComponents, 'move')"
+          (dndCanceled)="onDragged(sectionComponent, addedComponents, 'none')"
+          (dndEnd)="onDragEnd($event)"
+        />
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<header>
+  <nav
+    class="subscription-form-content-nav fixed-top d-flex align-items-center"
+  >
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-3 col-md-3 text-white">
+          <i class="fas fa-cubes me-2"></i>
+          <span translate>ANGULAR FORM BUILDER</span>
+        </div>
+        <div class="col-9 col-md-9 text-end p-0">
+          <button class="btn btn-fix" (click)="onPreview()">
+            <i class="fas fa-search me-2"></i>
+            <span translate>Preview</span>
+          </button>
+          <button class="btn btn-fix ms-2" (click)="generateHtml()">
+            <i class="far fa-file-code me-2"></i>
+            <span translate>Generate HTML</span>
+          </button>
+          <button class="btn btn-fix ms-2 me-2" (click)="generateJson()">
+            <i class="fas fa-code me-2"></i>
+            <span translate>Generate JSON</span>
+          </button>
+          <div ngbDropdown class="d-inline-block me-2">
+            <button
+              type="button"
+              class="btn btn-fix"
+              id="dropdownBasic1"
+              ngbDropdownToggle
+            >
+              <i class="fas fa-language me-1"></i> {{ currentLanguage }}
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button
+                ngbDropdownItem
+                translate
+                (click)="changeLanguage('en-US')"
+              >
+                English
+              </button>
+              <button
+                ngbDropdownItem
+                translate
+                (click)="changeLanguage('vi-VN')"
+              >
+                Vietnamese
+              </button>
+              <button
+                ngbDropdownItem
+                translate
+                (click)="changeLanguage('ja-JP')"
+              >
+                Japanese
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<section>
+  <div class="p-0 rounded" id="form-builder-wrapper">
+    <div *ngIf="subscriptionForm">
+      <div class="construct-container d-flex justify-content-between px-3">
+        <div class="panel-elements pt-0">
+          <div class="email-structure">
+            <div
+              class="component section-component rounded"
+              [ngbPopover]="popContent"
+              [popoverTitle]="popTitle"
+              placement="right"
+              container="body"
+              [autoClose]="false"
+              triggers="manual"
+              #popover="ngbPopover"
+              (click)="popover.open()"
+            >
+              <p><i class="fas fa-columns fa-2x"></i></p>
+              <span translate>Section</span>
+            </div>
+            <div
+              class="component rounded"
+              *ngFor="let component of components"
+              [dndDraggable]="component"
+              [dndType]="'nc'"
+              (dndStart)="onDragStart($event)"
+              (dndCopied)="onDragged(component, addedComponents, 'copy')"
+              (dndLinked)="onDragged(component, addedComponents, 'link')"
+              (dndMoved)="onDragged(component, addedComponents, 'move')"
+              (dndCanceled)="onDragged(component, addedComponents, 'none')"
+              (dndEnd)="onDragEnd($event)"
+            >
+              <p><i [class]="component.iconClass"></i></p>
+              <span translate>{{ component.name }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-body flex-grow-1">
+          <div
+            class="email-body d-flex content-droppable-zone {{
+              dragStartClass
+            }} dndList"
+            [ngClass]="{
+              'align-items-start':
+                subscriptionForm.content_dnd.form_design.page_alignment === 'top',
+              'align-items-center':
+                subscriptionForm.content_dnd.form_design.page_alignment === 'center',
+              'align-items-end':
+                subscriptionForm.content_dnd.form_design.page_alignment === 'bottom'
+            }"
+            [ngStyle]="{
+              'font-family':
+                subscriptionForm.content_dnd.form_design.font_family,
+              'font-size':
+                subscriptionForm.content_dnd.form_design.font_size + 'px',
+              background:
+                subscriptionForm.content_dnd.form_design.background_color,
+              padding:
+                subscriptionForm.content_dnd.form_design.page_paddings + 'px'
+            }"
+          >
+            <div
+              class="form-container mx-auto"
+              dndDropzone
+              (dndDrop)="
+                onDrop($event, subscriptionForm.content_dnd.added_components)
+              "
+              [ngStyle]="{
+                width: subscriptionForm.content_dnd.form_design.fullWidth
+                  ? '100%'
+                  : subscriptionForm.content_dnd.form_design.width + 'px',
+                'background-color':
+                  subscriptionForm.content_dnd.form_design
+                    .container_background_color,
+                'border-radius':
+                  subscriptionForm.content_dnd.form_design.rounded_corners +
+                  'px',
+                padding:
+                  subscriptionForm.content_dnd.form_design.form_paddings + 'px',
+                border:
+                  'solid ' +
+                  subscriptionForm.content_dnd.form_design.form_border_width +
+                  'px ' +
+                  subscriptionForm.content_dnd.form_design.form_border_color
+              }"
+            >
+              <ng-container
+                *ngTemplateOutlet="
+                  recursiveList;
+                  context: {
+                    $implicit: subscriptionForm.content_dnd.added_components
+                  }
+                "
+              ></ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="panel-options property-column">
+          <div class="property-column-inner">
+            <ul ngbNav #nav="ngbNav" [(activeId)]="activeTab" class="nav-tabs">
+              <li [ngbNavItem]="1" id="tab-current-element">
+                <a ngbNavLink translate>Current Element</a>
+                <ng-template ngbNavContent>
+                  <app-current-element
+                    [selectedComponent]="selectedComponent"
+                  ></app-current-element>
+                </ng-template>
+              </li>
+              <li [ngbNavItem]="2" id="tab-form-design">
+                <a ngbNavLink translate>Form Design</a>
+                <ng-template ngbNavContent>
+                  <app-form-design-property
+                    [formDesign]="subscriptionForm.content_dnd.form_design"
+                  ></app-form-design-property>
+                </ng-template>
+              </li>
+            </ul>
+            <div [ngbNavOutlet]="nav" class="mt-2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,64 @@
+<input name="imageUrl" type="file" accept="image/*" (change)="handleInputChange($event)" class="form-control mt-3">
+
+<div class="row my-2">
+  <label class="mb-1 col-sm-12" translate>Alternative text</label>
+  <div class="col-sm-12">
+    <input
+      class="form-control form-control-sm"
+      [(ngModel)]="component.element.alt_text"
+    />
+  </div>
+</div>
+<div class="row mb-2">
+  <label class="mb-1 col-sm-12" translate>Link</label>
+  <div class="col-sm-12">
+    <input
+      type="text"
+      class="form-control form-control-sm"
+      [(ngModel)]="component.element.image_link"
+    />
+  </div>
+</div>
+<div class="row mb-2">
+  <label class="col-sm-6" translate>Image width</label>
+  <div class="col-sm-6">
+    <div class="input-group input-group-sm">
+      <input
+        type="number"
+        class="form-control form-control-sm"
+        max="100"
+        min="1"
+        [(ngModel)]="component.element.width"
+      />
+      <span class="input-group-text">%</span>
+    </div>
+  </div>
+</div>
+<div class="row mb-2">
+  <label class="col-sm-6" translate>Placement</label>
+  <div class="col-sm-6">
+    <div class="row g-0">
+      <button
+        class="col btn btn-primary btn-sm rounded-0"
+        [ngClass]="{ active: component.element.alignment === 'left' }"
+        (click)="component.element.alignment = 'left'"
+      >
+        <i class="fas fa-align-left"></i>
+      </button>
+      <button
+        class="col btn btn-primary btn-sm rounded-0"
+        [ngClass]="{ active: component.element.alignment === 'center' }"
+        (click)="component.element.alignment = 'center'"
+      >
+        <i class="fas fa-align-center"></i>
+      </button>
+      <button
+        class="col btn btn-primary btn-sm rounded-0"
+        [ngClass]="{ active: component.element.alignment === 'right' }"
+        (click)="component.element.alignment = 'right'"
+      >
+        <i class="fas fa-align-right"></i>
+      </button>
+    </div>
+  </div>
+</div>

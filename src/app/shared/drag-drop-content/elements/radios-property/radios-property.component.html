@@ -1,0 +1,78 @@
+<div class="row g-0">
+  <label class="mb-1 col-sm-12" translate
+    >Label of the radio buttons group</label
+  >
+  <div class="col-sm-12 mb-2">
+    <input
+      type="text"
+      class="form-control form-control-sm"
+      [(ngModel)]="component.element.label"
+    />
+  </div>
+</div>
+<div class="mb-2 form-check">    
+  <input type="checkbox" class="form-check-input" [(ngModel)]="component.element.show_label" id="show_label" /> 
+  <label for="show_label" class="form-check-label" translate>Show label</label> 
+</div>
+<div class="row mb-2">
+  <label class="col-sm-12" translate>Field name</label>
+  <div class="col-sm-12">
+    <input type="text" name="field_name" [(ngModel)]="component.element.field_name" class="form-control form-control-sm">    
+  </div>
+</div>
+<div class="row">
+  <label class="mb-1 col-sm-12" translate>Options list</label>
+  <div class="col-sm-12 mb-2">
+    <table class="table table-sm">
+      <tbody>
+        <tr *ngFor="let option of component.element.options; let idx = index">
+          <td class="text-center align-middle">
+            <div>
+              <input
+                type="radio"
+                name="is_selected"
+                [value]="option.id"
+                [checked]="option.is_selected"
+                (change)="setAsDefault($event)"
+              />
+            </div>
+            <button
+              class="btn btn-sm text-danger"
+              (click)="removeOption(option.id)"
+              [disabled]="component.element.options.length < 3"
+            >
+              <i class="fas fa-trash"></i>
+            </button>
+          </td>
+          <td>
+            <div class="input-group input-group-sm mb-1">
+              <span class="input-group-text option-key-value" translate>Text</span>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                [placeholder]="'Option ' + idx"
+                [(ngModel)]="option.text"
+              />
+            </div>
+            <div class="input-group input-group-sm">
+              <span class="input-group-text option-key-value" translate>Value</span>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                [placeholder]="'Value ' + idx"
+                [(ngModel)]="option.value"
+              />
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-link btn-sm" (click)="addOption()">
+      <i class="fas fa-plus me-2"></i><span translate>Add option</span>      
+    </button>
+  </div>
+</div>
+<div class="form-check">
+  <input type="checkbox" class="form-check-input" [(ngModel)]="component.element.is_required" id="is_required" />
+  <label for="is_required" class="form-check-label" translate>Set as required</label>       
+</div>

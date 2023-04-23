@@ -1,0 +1,14 @@
+<select
+  class="form-select form-select-sm"
+  [(ngModel)]="component.element.font_family"
+  *ngIf="component.hasOwnProperty('element')"
+>
+  <option [value]="font.value" *ngFor="let font of fonts">{{ font.name }}</option>
+</select>
+<select
+  class="form-select form-select-sm"
+  [(ngModel)]="component.font_family"
+  *ngIf="!component.hasOwnProperty('element')"
+>
+  <option [value]="font.value" *ngFor="let font of fonts">{{ font.name }}</option>
+</select>

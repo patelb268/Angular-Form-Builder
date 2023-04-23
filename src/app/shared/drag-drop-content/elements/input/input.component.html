@@ -1,0 +1,135 @@
+<div [ngStyle]="{
+  'padding-top': component.componentSettings.padding_top + 'px',
+  'padding-right': component.componentSettings.padding_right + 'px',
+  'padding-bottom': component.componentSettings.padding_bottom + 'px',
+  'padding-left': component.componentSettings.padding_left + 'px',
+  'background-color': component.componentSettings.background_color,
+  'border-radius': component.componentSettings.rounded_corners + 'px',
+  'height': component.componentSettings.height > 0 ? component.componentSettings.height + 'px' : 'auto'
+}">
+  <label
+    class="m-0"
+    [ngClass]="{
+      'fw-bold': formDesign.label_font_bold,
+      'fst-italic': formDesign.label_font_italic,
+      'd-none': !component.element.show_label
+    }"
+    [ngStyle]="{
+      color: formDesign.label_font_color,
+      'font-size': formDesign.label_font_size + 'px'
+    }"
+  >
+    <span class="d-inline-block">{{ component.element.label }}</span>
+    <span
+      *ngIf="component.element.is_required"
+      class="text-danger d-inline-block ms-1"
+      >*</span
+    >
+  </label>
+  <ng-container [ngSwitch]="component.type">
+    <div class="input-group" *ngSwitchCase="'date'">
+      <input
+        type="text"
+        class="form-control"
+        [ngClass]="{
+          'form-control-lg': formDesign.field_size === 'l',
+          'form-control-sm': formDesign.field_size === 's'
+        }"
+        [placeholder]="component.element.placeholder_text || ''"
+        [ngStyle]="{
+          'background-color': formDesign.field_background_color,
+          border:
+            'solid ' +
+            formDesign.field_border_width +
+            'px' +
+            formDesign.field_border_color,
+          'border-radius': formDesign.field_rounded_corners + 'px'
+        }"
+      />
+      <span class="input-group-text">
+        <i class="fas fa-calendar"></i>
+      </span>
+    </div>
+    <div class="input-group" *ngSwitchCase="'datetime'">
+      <input
+        type="text"
+        class="form-control"
+        [placeholder]="component.element.placeholder_text || ''"
+        [ngClass]="{
+          'form-control-lg': formDesign.field_size === 'l',
+          'form-control-sm': formDesign.field_size === 's'
+        }"
+        [ngStyle]="{
+          'background-color': formDesign.field_background_color,
+          border:
+            'solid ' +
+            formDesign.field_border_width +
+            'px' +
+            formDesign.field_border_color,
+          'border-radius': formDesign.field_rounded_corners + 'px'
+        }"
+      />
+
+      <span class="input-group-text">
+        <i class="fas fa-calendar-times"></i>
+      </span>
+    </div>
+    <input
+      type="number"
+      class="form-control"
+      [placeholder]="component.element.placeholder_text || ''"
+      *ngSwitchCase="'number'"
+      [ngClass]="{
+        'form-control-lg': formDesign.field_size === 'l',
+        'form-control-sm': formDesign.field_size === 's'
+      }"
+      [ngStyle]="{
+        'background-color': formDesign.field_background_color,
+        border:
+          'solid ' +
+          formDesign.field_border_width +
+          'px' +
+          formDesign.field_border_color,
+        'border-radius': formDesign.field_rounded_corners + 'px'
+      }"
+    />
+    <input
+      type="email"
+      class="form-control"
+      [placeholder]="component.element.placeholder_text || ''"
+      *ngSwitchCase="'email'"
+      [ngClass]="{
+        'form-control-lg': formDesign.field_size === 'l',
+        'form-control-sm': formDesign.field_size === 's'
+      }"
+      [ngStyle]="{
+        'background-color': formDesign.field_background_color,
+        border:
+          'solid ' +
+          formDesign.field_border_width +
+          'px' +
+          formDesign.field_border_color,
+        'border-radius': formDesign.field_rounded_corners + 'px'
+      }"
+    />
+    <input
+      type="text"
+      class="form-control"
+      [placeholder]="component.element.placeholder_text || ''"
+      *ngSwitchDefault
+      [ngClass]="{
+        'form-control-lg': formDesign.field_size === 'l',
+        'form-control-sm': formDesign.field_size === 's'
+      }"
+      [ngStyle]="{
+        'background-color': formDesign.field_background_color,
+        border:
+          'solid ' +
+          formDesign.field_border_width +
+          'px' +
+          formDesign.field_border_color,
+        'border-radius': formDesign.field_rounded_corners + 'px'
+      }"
+    />
+  </ng-container>
+</div>

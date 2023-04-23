@@ -1,0 +1,61 @@
+<div class="row mb-2">
+  <label for="" class="col-sm-6" translate>Text color</label>
+  <div class="col-sm-6">
+    <div class="input-group">
+      <span
+        class="input-group-text"
+        [style.background]="component.element.text_color"
+      ></span>
+      <input
+        class="form-control form-control-sm"
+        [(colorPicker)]="component.element.text_color"
+        [cpPosition]="'bottom'"
+        [cpDisableInput]="true"
+        [cpAlphaChannel]="'disabled'"
+        [cpPositionOffset]="'-100%'"
+        [value]="component.element.text_color"
+      />
+    </div>
+  </div>
+</div>
+<div class="row mb-2">
+  <label for="" class="col-sm-6" translate>Font</label>
+  <div class="col-sm-6">
+    <app-font-options [component]="component"></app-font-options>
+  </div>
+</div>
+<div class="row mb-2">
+  <label for="" class="col-sm-6" translate>Line height</label>
+  <div class="col-sm-6">
+    <div class="row g-0">
+      <button
+        class="col btn btn-primary btn-sm rounded-0"
+        [ngClass]="{ active: component.element.line_height === 1 }"
+        (click)="component.element.line_height = 1"
+      >
+        <img src="assets/lh1.svg" alt="" />
+      </button>
+      <button
+        class="col btn btn-primary btn-sm rounded-0"
+        [ngClass]="{ active: component.element.line_height === 1.2 }"
+        (click)="component.element.line_height = 1.2"
+      >
+        <img src="assets/lh12.svg" alt="" />
+      </button>
+      <button
+        class="col btn btn-primary btn-sm rounded-0"
+        [ngClass]="{ active: component.element.line_height === 1.5 }"
+        (click)="component.element.line_height = 1.5"
+      >
+        <img src="assets/lh15.svg" alt="" />
+      </button>
+      <button
+        class="col btn btn-primary btn-sm rounded-0"
+        [ngClass]="{ active: component.element.line_height === 2 }"
+        (click)="component.element.line_height = 2"
+      >
+        <img src="assets/lh2.svg" alt="" />
+      </button>
+    </div>
+  </div>
+</div>

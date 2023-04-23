@@ -1,0 +1,17 @@
+.social-item {
+  a {
+    display: block;
+  }
+
+  .btn-danger {
+    height: auto;
+  }
+}
+
+.social-item-wrapper {
+  &.dropdown-item {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,149 @@
+<div class="not-selected-component p-3" *ngIf="!selectedComponent">
+  <p translate>Item not selected for editing.</p>
+</div>
+<div class="container-fluid px-0" *ngIf="selectedComponent">
+  <ng-container [ngSwitch]="selectedComponent.machineName">
+    <app-text-property
+      *ngSwitchCase="'text'"
+      [component]="selectedComponent"
+    ></app-text-property>
+    <app-picture-property
+      *ngSwitchCase="'picture'"
+      [component]="selectedComponent"
+    ></app-picture-property>
+    <app-checkbox-property
+      *ngSwitchCase="'checkbox'"
+      [component]="selectedComponent"
+    ></app-checkbox-property>
+    <app-spacer-property
+      *ngSwitchCase="'spacer'"
+      [component]="selectedComponent"
+    ></app-spacer-property>
+    <app-textarea-property
+      *ngSwitchCase="'textarea'"
+      [component]="selectedComponent"
+    ></app-textarea-property>
+    <app-radios-property
+      *ngSwitchCase="'radios'"
+      [component]="selectedComponent"
+    ></app-radios-property>
+    <app-dropdown-property
+      *ngSwitchCase="'dropdown'"
+      [component]="selectedComponent"
+    ></app-dropdown-property>
+    <app-input-property
+      *ngSwitchCase="'input'"
+      [component]="selectedComponent"
+    ></app-input-property>
+    <app-button-property
+      *ngSwitchCase="'button'"
+      [component]="selectedComponent"
+    ></app-button-property>
+    <app-separator-property
+      *ngSwitchCase="'separator'"
+      [component]="selectedComponent"
+    ></app-separator-property>
+    <app-social-property
+      *ngSwitchCase="'social'"
+      [component]="selectedComponent"
+    ></app-social-property>
+    <app-uploader-property
+      *ngSwitchCase="'uploader'"
+      [component]="selectedComponent"
+    ></app-uploader-property>
+  </ng-container>
+  <div *ngIf="selectedComponent && selectedComponent.machineName !== 'section'">
+    <hr />
+    <h6 translate>Component Settings</h6>
+    <div class="row mb-2">
+      <label for="" class="col-sm-6" translate>Background color</label>
+      <div class="col-sm-6">
+        <div class="input-group">
+          <span
+            class="input-group-text"
+            [style.background]="
+              selectedComponent.componentSettings.background_color
+            "
+          ></span>
+
+          <input
+            class="form-control form-control-sm"
+            [(colorPicker)]="
+              selectedComponent.componentSettings.background_color
+            "
+            [cpPosition]="'bottom'"
+            [cpDisableInput]="true"
+            [cpAlphaChannel]="'disabled'"
+            [cpPositionOffset]="'-100%'"
+            [value]="selectedComponent.componentSettings.background_color"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row mb-2">
+      <label for="" class="col-sm-6" translate>Rounded Corners</label>
+      <div class="col-sm-6">
+        <input
+          type="number"
+          min="0"
+          class="form-control form-control-sm"
+          [(ngModel)]="selectedComponent.componentSettings.rounded_corners"
+        />
+      </div>
+    </div>
+    <div class="row mb-2" *ngIf="selectedComponent.machineName !== 'spacer'">
+      <label for="" class="col-sm-6" translate>Height</label>
+      <div class="col-sm-6">
+        <input
+          type="number"
+          min="0"
+          class="form-control form-control-sm"
+          [(ngModel)]="selectedComponent.componentSettings.height"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <label for="" class="col-sm-12 mb-1" translate>The inner padding</label>
+      <div class="col-sm-12">
+        <div class="row">
+          <div class="col-sm-3 text-center">
+            <input
+              type="number"
+              min="0"
+              class="form-control form-control-sm"
+              [(ngModel)]="selectedComponent.componentSettings.padding_top"
+            />
+            <span translate>Top</span>
+          </div>
+          <div class="col-sm-3 text-center">
+            <input
+              type="number"
+              min="0"
+              class="form-control form-control-sm"
+              [(ngModel)]="selectedComponent.componentSettings.padding_bottom"
+            />
+            <span translate>Bottom</span>
+          </div>
+          <div class="col-sm-3 text-center">
+            <input
+              type="number"
+              min="0"
+              class="form-control form-control-sm"
+              [(ngModel)]="selectedComponent.componentSettings.padding_left"
+            />
+            <span translate>Left</span>
+          </div>
+          <div class="col-sm-3 text-center">
+            <input
+              type="number"
+              min="0"
+              class="form-control form-control-sm"
+              [(ngModel)]="selectedComponent.componentSettings.padding_right"
+            />
+            <span translate>Right</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

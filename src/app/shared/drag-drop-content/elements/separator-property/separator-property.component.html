@@ -1,0 +1,50 @@
+<div class="row g-0 mb-2">
+  <div class="col-3">
+    <input
+      type="number"
+      min="0"
+      class="form-control form-control-sm"
+      [(ngModel)]="component.element.border_width"
+    />
+  </div>
+  <div class="col-4 px-2">
+    <div ngbDropdown class="d-block">
+      <button
+        class="btn btn-sm w-100 btn-outline-primary"
+        ngbDropdownToggle
+      >
+        <div
+          [class]="'separator-style ' + component.element.border_style"
+        ></div>
+      </button>
+      <div ngbDropdownMenu>
+        <a ngbDropdownItem (click)="component.element.border_style = 'solid'">
+          <div class="separator-style solid"></div>
+        </a>
+        <a ngbDropdownItem (click)="component.element.border_style = 'dashed'">
+          <div class="separator-style dashed"></div>
+        </a>
+        <a ngbDropdownItem (click)="component.element.border_style = 'dotted'">
+          <div class="separator-style dotted"></div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="col-5">
+    <div class="input-group">
+      <span
+        class="input-group-text"
+        [style.background]="component.element.border_color"
+      ></span>
+      <input
+        class="form-control form-control-sm"
+        [(colorPicker)]="component.element.border_color"
+        [cpPosition]="'bottom'"
+        [cpDisableInput]="true"
+        [cpAlphaChannel]="'disabled'"
+        [cpPositionOffset]="'-100%'"
+        [value]="component.element.border_color"
+      />
+    </div>
+  </div>
+</div>

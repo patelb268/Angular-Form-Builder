@@ -1,0 +1,23 @@
+<div
+  [ngStyle]="{
+    'padding-top': component.componentSettings.padding_top + 'px',
+    'padding-right': component.componentSettings.padding_right + 'px',
+    'padding-bottom': component.componentSettings.padding_bottom + 'px',
+    'padding-left': component.componentSettings.padding_left + 'px',
+    'background-color': component.componentSettings.background_color,
+    'border-radius': component.componentSettings.rounded_corners + 'px',
+    height: component.componentSettings.height > 0 ? component.componentSettings.height + 'px' : 'auto',
+    'text-align': component.element.alignment
+  }"
+>
+  <div
+    class="d-inline-block"
+    [ngStyle]="{
+      width: component.element.placement === 'vertically' ? component.element.icon_size : 'auto'
+    }"
+  >
+    <a *ngFor="let social of component.buttons">
+      <img [src]="social.img_link" alt="" [ngStyle]="{ width: component.element.icon_size, margin: '5px' }" />
+    </a>
+  </div>
+</div>

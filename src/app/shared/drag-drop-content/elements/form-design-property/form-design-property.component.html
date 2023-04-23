@@ -1,0 +1,271 @@
+<div class="container-fluid px-0">
+  <div class="row mb-2">
+    <label class="col-6" translate>Full width</label>
+    <div class="col-6 text-end">
+      <input type="checkbox" [(ngModel)]="formDesign.fullWidth" />
+    </div>
+  </div>
+  <div class="row mb-2" *ngIf="!formDesign.fullWidth">
+    <label class="col-6" translate>Form width</label>
+    <div class="col-6">
+      <input
+        type="number"
+        class="form-control form-control-sm"
+        min="200"
+        max="960"
+        [(ngModel)]="formDesign.width"
+      />
+    </div>
+  </div>
+  <div class="row mb-2">
+    <label class="col-6" translate>Page alignment</label>
+    <div class="col-6">
+      <select class="form-select form-select-sm" [(ngModel)]="formDesign.page_alignment">
+        <option value="top" translate>Top</option>
+        <option value="center" translate>Center</option>
+        <option value="bottom" translate>Bottom</option>
+      </select>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <label class="col-6" translate>Page background</label>
+    <div class="col-6">
+      <div class="input-group">
+        <span
+          class="input-group-text"
+          [style.background]="formDesign.background_color"
+        ></span>
+        <input
+          class="form-control form-control-sm"
+          [(colorPicker)]="formDesign.background_color"
+          [cpPosition]="'bottom'"
+          [cpDisableInput]="true"
+          [cpAlphaChannel]="'disabled'"
+          [cpPositionOffset]="'-100%'"
+          [value]="formDesign.background_color"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <label for="" class="col-sm-6" translate>Page padding</label>
+    <div class="col-sm-6">
+      <input
+        type="number"
+        min="0"
+        class="form-control form-control-sm"
+        min="0"
+        [(ngModel)]="formDesign.page_paddings"
+      />
+    </div>
+  </div>
+  <div class="row mb-2">
+    <label class="col-sm-6" translate>Form background</label>
+    <div class="col-sm-6">
+      <div class="input-group">
+        <span
+          class="input-group-text"
+          [style.background]="formDesign.container_background_color"
+        ></span>
+        <input
+          class="form-control form-control-sm"
+          [(colorPicker)]="formDesign.container_background_color"
+          [cpPosition]="'bottom'"
+          [cpDisableInput]="true"
+          [cpAlphaChannel]="'disabled'"
+          [cpPositionOffset]="'-100%'"
+          [value]="formDesign.container_background_color"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <label for="" class="col-sm-6" translate>Font</label>
+    <div class="col-sm-6">
+      <app-font-options [component]="formDesign"></app-font-options>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <label for="" class="col-sm-6" translate>Rounded Corners</label>
+    <div class="col-sm-6">
+      <input
+        type="number"
+        class="form-control form-control-sm"
+        min="0"
+        [(ngModel)]="formDesign.rounded_corners"
+      />
+    </div>
+  </div>
+  <div class="row mb-2">
+    <label for="" class="col-6" translate>Form border</label>
+    <div class="col-6 d-flex justify-content-between">
+      <input
+        type="number"
+        class="form-control form-control-sm me-1"
+        min="0"
+        [(ngModel)]="formDesign.form_border_width"
+        style="max-width: 50px"
+      />
+      <div class="input-group">
+        <span
+          class="input-group-text"
+          [style.background]="formDesign.form_border_color"
+        ></span>
+        <input
+          class="form-control form-control-sm"
+          [(colorPicker)]="formDesign.form_border_color"
+          [cpPosition]="'bottom'"
+          [cpDisableInput]="true"
+          [cpAlphaChannel]="'disabled'"
+          [cpPositionOffset]="'-260%'"
+          [value]="formDesign.form_border_color"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <label for="" class="col-6" translate>Form padding</label>
+    <div class="col-6">
+      <input
+        type="number"
+        min="5"
+        class="form-control form-control-sm"
+        min="0"
+        [(ngModel)]="formDesign.form_paddings"
+      />
+    </div>
+  </div>
+
+  <strong translate>Input fields and labels</strong>
+  <hr class="mt-1" />
+  <div class="row mb-2">
+    <label class="col-sm-8" translate>Field size</label>
+    <div class="col-sm-4">
+      <div class="row g-0">
+        <button
+          class="col btn btn-primary btn-sm rounded-0"
+          [ngClass]="{ active: formDesign.field_size === 's' }"
+          (click)="formDesign.field_size = 's'"
+        >
+          S
+        </button>
+        <button
+          class="col btn btn-primary btn-sm rounded-0"
+          [ngClass]="{ active: formDesign.field_size === 'm' }"
+          (click)="formDesign.field_size = 'm'"
+        >
+          M
+        </button>
+        <button
+          class="col btn btn-primary btn-sm rounded-0"
+          [ngClass]="{ active: formDesign.field_size === 'l' }"
+          (click)="formDesign.field_size = 'l'"
+        >
+          L
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <label class="col-sm-6" translate>Field background</label>
+    <div class="col-sm-6">
+      <div class="input-group">
+        <span
+          class="input-group-text"
+          [style.background]="formDesign.field_background_color"
+        ></span>
+        <input
+          class="form-control form-control-sm"
+          [(colorPicker)]="formDesign.field_background_color"
+          [cpPosition]="'bottom'"
+          [cpDisableInput]="true"
+          [cpAlphaChannel]="'disabled'"
+          [cpPositionOffset]="'-100%'"
+          [value]="formDesign.field_background_color"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <label for="" class="col-6" translate>Border</label>
+    <div class="col-6 d-flex justify-content-between">
+      <input
+        type="number"
+        class="form-control form-control-sm me-1"
+        min="0"
+        [(ngModel)]="formDesign.field_border_width"
+        style="max-width: 50px"
+      />
+      <div class="input-group">
+        <span
+          class="input-group-text"
+          [style.background]="formDesign.field_border_color"
+        ></span>
+        <input
+          class="form-control form-control-sm"
+          [(colorPicker)]="formDesign.field_border_color"
+          [cpPosition]="'bottom'"
+          [cpDisableInput]="true"
+          [cpAlphaChannel]="'disabled'"
+          [cpPositionOffset]="'-260%'"
+          [value]="formDesign.field_border_color"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <label for="" class="col-sm-6" translate>Rounded Corners</label>
+    <div class="col-sm-6">
+      <input
+        type="number"
+        class="form-control form-control-sm"
+        min="0"
+        [(ngModel)]="formDesign.field_rounded_corners"
+      />
+    </div>
+  </div>
+  <div class="row g-0">
+    <label for="" class="col-12 mb-2" translate>Label font style</label>
+    <div class="col-12 d-flex justify-content-between">
+      <div class="input-group input-group-sm">
+        <input
+          type="number"
+          class="form-control form-control-sm"
+          min="12"
+          [(ngModel)]="formDesign.label_font_size"
+        />
+        <span class="input-group-text">px</span>
+      </div>
+
+      <div class="input-group mx-1">
+        <span
+          class="input-group-text"
+          [style.background]="formDesign.label_font_color"
+        ></span>
+        <input
+          class="form-control form-control-sm"
+          [(colorPicker)]="formDesign.label_font_color"
+          [cpPosition]="'top'"
+          [cpDisableInput]="true"
+          [cpAlphaChannel]="'disabled'"
+          [cpPositionOffset]="'-100%'"
+          [value]="formDesign.label_font_color"
+        />
+      </div>
+      <button
+        class="btn btn-primary btn-sm rounded-0"
+        [ngClass]="{ active: formDesign.label_font_bold }"
+        (click)="formDesign.label_font_bold = !formDesign.label_font_bold"
+      >
+        <i class="fas fa-bold"></i>
+      </button>
+      <button
+        class="btn btn-primary btn-sm rounded-0"
+        [ngClass]="{ active: formDesign.label_font_italic }"
+        (click)="formDesign.label_font_italic = !formDesign.label_font_italic"
+      >
+        <i class="fas fa-italic"></i>
+      </button>
+    </div>
+  </div>  
+</div>
